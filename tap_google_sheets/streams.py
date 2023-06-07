@@ -126,10 +126,11 @@ class GoogleSheets:
     params = None
     state = None
 
-    def __init__(self, client, spreadsheet_id, start_date=None):
+    def __init__(self, client, spreadsheet_id, start_date=None, batch_rows=200):
         self.client = client
         self.config_start_date = start_date
         self.spreadsheet_id = spreadsheet_id
+        self.batch_rows = batch_rows
 
     def get_path(self, sheet_title_encoded=""):
         """
@@ -513,7 +514,7 @@ class SheetsLoadData(GoogleSheets):
 
                         # Initialize paging for 1st batch
                         is_last_row = False
-                        batch_rows = 200
+                        batch_rows = self.batch_rows
                         from_row = 2
                         if sheet_max_row < batch_rows:
                             to_row = sheet_max_row

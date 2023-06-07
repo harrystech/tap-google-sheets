@@ -44,7 +44,7 @@ def sync(client, config, catalog, state):
             # get sheets from the metadata
             sheets = spreadsheet_metadata.get("sheets")
             # class to load sheet's data
-            sheets_load_data = SheetsLoadData(client, config.get("spreadsheet_id"), config.get("start_date"))
+            sheets_load_data = SheetsLoadData(client, config.get("spreadsheet_id"), config.get("start_date"), config.get('batch_rows'))
 
             # perform sheet's sync and get sheet's metadata and sheet loaded records for "sheet_metadata" and "sheets_loaded" streams
             sheet_metadata_records, sheets_loaded_records = sheets_load_data.load_data(catalog=catalog,
